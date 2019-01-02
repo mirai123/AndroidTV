@@ -25,6 +25,9 @@ public class MainFragment extends BrowseFragment {
     private ArrayObjectAdapter mRowsAdapter;
     private static int GRID_ITEM_WIDTH = 300;
     private static int GRID_ITEM_HEIGHT = 200;
+
+    //private static SimpleBackgroundManager simpleBackgroundManager = null;
+    private static PicassoBackgroundManager  picassoBackgroundManager  = null;
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         Log.i(TAG,"onActivityCreated");
@@ -35,6 +38,9 @@ public class MainFragment extends BrowseFragment {
         loadRows();
 
         setupEventListeners();
+
+        //simpleBackgroundManager = new SimpleBackgroundManager(getActivity());
+        picassoBackgroundManager = new PicassoBackgroundManager(getActivity());
     }
 
     private void setupEventListeners(){
@@ -44,8 +50,15 @@ public class MainFragment extends BrowseFragment {
     public final class ItemViewSelectedListener implements OnItemViewSelectedListener{
 
         @Override
-        public void onItemSelected(Presenter.ViewHolder viewHolder, Object o, RowPresenter.ViewHolder viewHolder1, Row row) {
-
+        public void onItemSelected(Presenter.ViewHolder viewHolder, Object item,
+                                   RowPresenter.ViewHolder viewHolder1, Row row) {
+            if(item instanceof String){
+                picassoBackgroundManager.updateBackgroundWithDelay("http://heimkehrend.raindrop.jp/kl-hacker/wp-content/uploads/2014/08/DSC02580.jpg");
+                //simpleBackgroundManager.clearBackground();
+            }else if(item instanceof  Movie){
+                //simpleBackgroundManager.updateBackground(getActivity().getDrawable(R.drawable.movie));
+                picassoBackgroundManager.updateBackgroundWithDelay(((Movie) item).getCardImageUrl());
+            }
         }
     }
 
@@ -72,7 +85,14 @@ public class MainFragment extends BrowseFragment {
             Movie movie = new Movie();
             movie.setTitle("title" + i);
             movie.setStudio("studio" + i);
-            movie.setCardImageUrl("http://heimkehrend.raindrop.jp/kl-hacker/wp-content/uploads/2014/08/DSC02580.jpg");
+            if(i/3 == 0){
+                movie.setCardImageUrl("http://heimkehrend.raindrop.jp/kl-hacker/wp-content/uploads/2014/08/DSC02580.jpg");
+            }else if(i % 3 == 1){
+                movie.setCardImageUrl("http://heimkehrend.raindrop.jp/kl-hacker/wp-content/uploads/2014/08/DSC02630.jpg");
+            }else{
+                movie.setCardImageUrl("http://heimkehrend.raindrop.jp/kl-hacker/wp-content/uploads/2014/08/DSC02529.jpg");
+            }
+            //movie.setCardImageUrl("http://heimkehrend.raindrop.jp/kl-hacker/wp-content/uploads/2014/08/DSC02580.jpg");
             cardRowAdapter.add(movie);
         }
         ListRow listRow1 = new ListRow(cardPresenterHeader,cardRowAdapter);
