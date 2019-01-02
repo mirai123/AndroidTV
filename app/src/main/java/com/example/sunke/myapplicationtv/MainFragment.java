@@ -7,7 +7,10 @@ import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.HeaderItem;
 import android.support.v17.leanback.widget.ListRow;
 import android.support.v17.leanback.widget.ListRowPresenter;
+import android.support.v17.leanback.widget.OnItemViewSelectedListener;
 import android.support.v17.leanback.widget.Presenter;
+import android.support.v17.leanback.widget.Row;
+import android.support.v17.leanback.widget.RowPresenter;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -26,8 +29,24 @@ public class MainFragment extends BrowseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         Log.i(TAG,"onActivityCreated");
         super.onActivityCreated(savedInstanceState);
+
         setupUIElement();
+
         loadRows();
+
+        setupEventListeners();
+    }
+
+    private void setupEventListeners(){
+        setOnItemViewSelectedListener(new ItemViewSelectedListener());
+    }
+
+    public final class ItemViewSelectedListener implements OnItemViewSelectedListener{
+
+        @Override
+        public void onItemSelected(Presenter.ViewHolder viewHolder, Object o, RowPresenter.ViewHolder viewHolder1, Row row) {
+
+        }
     }
 
     private void loadRows(){
