@@ -1,6 +1,6 @@
 package com.example.sunke.myapplicationtv;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v17.leanback.app.BrowseFragment;
@@ -8,6 +8,7 @@ import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.HeaderItem;
 import android.support.v17.leanback.widget.ListRow;
 import android.support.v17.leanback.widget.ListRowPresenter;
+import android.support.v17.leanback.widget.OnItemViewClickedListener;
 import android.support.v17.leanback.widget.OnItemViewSelectedListener;
 import android.support.v17.leanback.widget.Presenter;
 import android.support.v17.leanback.widget.Row;
@@ -51,6 +52,29 @@ public class MainFragment extends BrowseFragment {
     private void setupEventListeners(){
         //父类中的方法，可直接使用
         setOnItemViewSelectedListener(new ItemViewSelectedListener());
+        setOnItemViewClickedListener(new ItemViewClickedListener());
+    }
+
+    public final class ItemViewClickedListener implements OnItemViewClickedListener{
+
+        /**
+         * 当点击item时的事件
+         * @param viewHolder 视图支持
+         * @param item
+         * @param viewHolder1
+         * @param row
+         */
+        @Override
+        public void onItemClicked(Presenter.ViewHolder viewHolder, Object item, RowPresenter.ViewHolder viewHolder1, Row row) {
+            if(item instanceof Movie){
+                Movie movie = (Movie)item;
+                Log.d(TAG,"Item:" + item.toString());
+                Intent intent = new Intent(getActivity(),DetailsActivity.class);
+                intent.putExtra(DetailsActivity.MOVIE,movie);
+
+                getActivity().startActivity(intent);
+            }
+        }
     }
 
     public final class ItemViewSelectedListener implements OnItemViewSelectedListener{
@@ -95,7 +119,7 @@ public class MainFragment extends BrowseFragment {
         CardPresenter cardPresenter = new CardPresenter();
         ArrayObjectAdapter cardRowAdapter = new ArrayObjectAdapter(cardPresenter);
 
-        for(int i=0;i<3;i++){
+        for(int i=0;i<10;i++){
             Movie movie = new Movie();
             movie.setTitle("title" + i);
             movie.setStudio("studio" + i);

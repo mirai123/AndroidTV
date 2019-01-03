@@ -14,6 +14,7 @@ public class Movie implements Serializable {
     private String title;
     private String studio;
     private String cardImageUrl;
+    private String description;
 
     public long getId() {
         return id;
@@ -45,6 +46,14 @@ public class Movie implements Serializable {
 
     public void setCardImageUrl(String cardImageUrl) {
         this.cardImageUrl = cardImageUrl;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
