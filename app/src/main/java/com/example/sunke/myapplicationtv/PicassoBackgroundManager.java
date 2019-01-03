@@ -32,8 +32,10 @@ public class PicassoBackgroundManager {
     private URI mBackgroundUri;
     private PicassoBackgroundManagerTarget mBackgroundTarget;
 
+    //定时器工具
     Timer mBackgroundTimer;
 
+    //构造方法
     public PicassoBackgroundManager (Activity activity){
         mActivity = activity;
         mDefaultBackground = activity.getDrawable(DEFAULT_BACKGROUND_RES_ID);
@@ -44,7 +46,9 @@ public class PicassoBackgroundManager {
         activity.getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
     }
 
+    //开始计时器
     private void startBackgroundTimer(){
+        //如果计时器不为nul,删除计时器
         if(mBackgroundTimer != null){
             mBackgroundTimer.cancel();
         }
@@ -53,6 +57,7 @@ public class PicassoBackgroundManager {
         mBackgroundTimer.schedule(new UpdateBackgroundTask(),BACKGROUND_UPDATE_DELAY);
     }
 
+    //更新背景任务
     private class UpdateBackgroundTask extends TimerTask{
 
         @Override
@@ -60,6 +65,7 @@ public class PicassoBackgroundManager {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
+                    //如果背景的uri不为空，则更新图片
                     if(mBackgroundUri != null){
                         updateBackground(mBackgroundUri);
                     }
@@ -83,6 +89,7 @@ public class PicassoBackgroundManager {
         startBackgroundTimer();
     }
 
+    //更新背景图片
     private void updateBackground(URI uri){
         Picasso.with(mActivity)
                 .load(uri.toString())

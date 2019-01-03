@@ -1,5 +1,6 @@
 package com.example.sunke.myapplicationtv;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v17.leanback.app.BrowseFragment;
@@ -37,21 +38,34 @@ public class MainFragment extends BrowseFragment {
 
         loadRows();
 
+        //设置监听事件
         setupEventListeners();
 
         //simpleBackgroundManager = new SimpleBackgroundManager(getActivity());
         picassoBackgroundManager = new PicassoBackgroundManager(getActivity());
     }
 
+    /**
+     * 当item被选中时的监听事件
+     */
     private void setupEventListeners(){
+        //父类中的方法，可直接使用
         setOnItemViewSelectedListener(new ItemViewSelectedListener());
     }
 
     public final class ItemViewSelectedListener implements OnItemViewSelectedListener{
 
+        /**
+         * 当项目被选中时的监听事件
+         * @param viewHolder 视图支持
+         * @param item 项目
+         * @param viewHolder1 行的视图支持
+         * @param row 行
+         */
         @Override
         public void onItemSelected(Presenter.ViewHolder viewHolder, Object item,
                                    RowPresenter.ViewHolder viewHolder1, Row row) {
+            //判断item是String类型还是Movie类型
             if(item instanceof String){
                 picassoBackgroundManager.updateBackgroundWithDelay("http://heimkehrend.raindrop.jp/kl-hacker/wp-content/uploads/2014/08/DSC02580.jpg");
                 //simpleBackgroundManager.clearBackground();
