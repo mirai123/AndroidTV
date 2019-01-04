@@ -15,6 +15,7 @@ import android.support.v17.leanback.widget.ListRowPresenter;
 import android.support.v17.leanback.widget.SparseArrayObjectAdapter;
 import android.util.Log;
 
+import com.example.sunke.utils.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
