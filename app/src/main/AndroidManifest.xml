@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.sunke.myapplicationtv">
 
-    <!--是否在触摸屏上运行-->
+    <!-- 是否在触摸屏上运行 -->
     <uses-feature
         android:name="android.hardware.touchScreen"
-        android:required="false"/>
-    <!--true只在TV运行，false在TV与手机上运行-->
+        android:required="false" />
+    <!-- true只在TV运行，false在TV与手机上运行 -->
     <uses-feature
         android:name="android.software.leanback"
-        android:required="true"/>
-    <!--添加使用网络权限-->
-    <uses-permission android:name="android.permission.INTERNET"/>
+        android:required="true" />
+    <!-- 添加使用网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -26,16 +26,18 @@
             android:label="@string/app_name"
             android:logo="@drawable/app_icon_yourcompany">
             <intent-filter>
-                <!--这两个配置的意思是当APP启动时先启动哪个Activity,并且图标显示在列表里-->
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
 
-                <!--这个过滤器的作用是为了与googlePlay区分识别，没有添加到相应的过滤器的应用，googlePlay是不允许上架的-->
-                <category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
+                <!-- 这两个配置的意思是当APP启动时先启动哪个Activity,并且图标显示在列表里 -->
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <!-- 这个过滤器的作用是为了与googlePlay区分识别，没有添加到相应的过滤器的应用，googlePlay是不允许上架的 -->
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".DetailsActivity"></activity>
+        <activity android:name=".DetailsActivity"></activity>
+        <activity android:name=".ErrorActivity"></activity>
     </application>
 
 </manifest>

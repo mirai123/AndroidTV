@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">My ApplicationTV</string>
+    <string name="error_fragment_message">出错了</string>
+    <string name="dismiss_error">Dismiss</string>
 </resources>

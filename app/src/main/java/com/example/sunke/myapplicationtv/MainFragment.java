@@ -70,9 +70,15 @@ public class MainFragment extends BrowseFragment {
                 Movie movie = (Movie)item;
                 Log.d(TAG,"Item:" + item.toString());
                 Intent intent = new Intent(getActivity(),DetailsActivity.class);
+                //键值对的形式传值
                 intent.putExtra(DetailsActivity.MOVIE,movie);
 
                 getActivity().startActivity(intent);
+            }else if(item instanceof String){
+                if(item == "ErrorFragment"){
+                    Intent intent = new Intent(getActivity(),ErrorActivity.class);
+                    startActivity(intent);
+                }
             }
         }
     }
@@ -107,7 +113,8 @@ public class MainFragment extends BrowseFragment {
         HeaderItem gridItemPresenterHeader = new HeaderItem(0,"GridItemPresenter");
         GridItemPresenter gridItemPresenter = new GridItemPresenter();
         ArrayObjectAdapter gridRowAdapter = new ArrayObjectAdapter(gridItemPresenter);
-        gridRowAdapter.add("ITEM 1");
+//        gridRowAdapter.add("ITEM 1");
+        gridRowAdapter.add("ErrorFragment");
         gridRowAdapter.add("ITEM 2");
         gridRowAdapter.add("ITEM 3");
         ListRow listRow = new ListRow(gridItemPresenterHeader,gridRowAdapter);
